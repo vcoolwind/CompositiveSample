@@ -12,19 +12,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import vcoolwind.com.compositivesample.R;
+import vcoolwind.com.compositivesample.ui.common.LinearDividerItemDecoration;
 import vcoolwind.com.compositivesample.util.ArticleLab;
 
 /**
  * Created by BlackStone on 2016/11/3.
  */
 
-public class TitleFragment extends Fragment {
+public class FirstTitleFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        RecyclerView view = (RecyclerView) inflater.inflate(R.layout.recycleview_article_title, container, false);
+        RecyclerView view = (RecyclerView) inflater.inflate(R.layout.common_recycleview_container, container, false);
         view.setLayoutManager(new LinearLayoutManager(getActivity()));
+        view.addItemDecoration(new LinearDividerItemDecoration(getContext(),LinearLayoutManager.VERTICAL));
         view.setAdapter(new ArticleTitleAdapter());
         return view;
     }

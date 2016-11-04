@@ -67,4 +67,8 @@ class ArticleLab {
         return articleList.size
     }
 
+    fun swap(from: Int, to: Int) {
+        Collections.swap(articleList, from, to)
+    }
+
 }

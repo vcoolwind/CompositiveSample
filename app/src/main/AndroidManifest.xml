@@ -3,12 +3,20 @@
     package="vcoolwind.com.compositivesample">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        <activity
+            android:name=".ui.FirstRecycleViewActivity"
+            android:parentActivityName=".ui.NavigateActivity" />
+
+        <activity android:name=".ui.SecondRecycleViewActivity" />
+        <activity android:name=".ui.ThirdRecycleViewActivity"/>
+
+        <activity android:name=".ui.NavigateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
