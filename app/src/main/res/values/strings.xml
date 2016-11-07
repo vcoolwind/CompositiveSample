@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CompositiveSample</string>
+    <string name="add_address">添加</string>
+    <string name="select_address">查找</string>
 </resources>

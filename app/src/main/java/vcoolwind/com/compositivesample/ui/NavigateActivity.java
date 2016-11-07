@@ -39,5 +39,13 @@ public class NavigateActivity extends AppCompatActivity {
         });
 
 
+        Button button_camera = (Button)findViewById(R.id.button_camera);
+        button_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),CameraActivity.class));
+            }
+        });
+
     }
 }
