@@ -5,7 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -25,6 +27,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import vcoolwind.com.compositivesample.R;
+import vcoolwind.com.compositivesample.util.PermissionUtil;
+import vcoolwind.com.compositivesample.util.StorageUtil;
 
 /**
  * Created by BlackStone on 2016/11/7.
@@ -54,7 +58,7 @@ public class CameraActivity extends AppCompatActivity {
                 dispatchTakePictureIntent();
                 return true;
             case R.id.save_photo:
-                verifyStoragePermissions(this);
+                PermissionUtil.verifyStoragePermissions(this);
                 doTakePictureAndSave();
                 return true;
             default:
@@ -78,6 +82,7 @@ public class CameraActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     Log.i(getClass().getSimpleName(), "通知：" + mCurrentTmpPicFile);
                     galleryAddPic(mCurrentTmpPicFile);
+                    setPic();
 
                 } else {
                     Toast.makeText(this, "照相失败！", Toast.LENGTH_SHORT).show();
@@ -104,10 +109,28 @@ public class CameraActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE_SAVE = 2;
 
     private File createImageFile() throws IOException {
+
+        if (!StorageUtil.isExternalStorageWritable()) {
+            Log.i(getClass().getSimpleName(), "外部存储不可写入！");
+            return null;
+        }
+
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
+        //File storageDir =  getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        //File storageDirP =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        //File storageDir =  Environment.getExternalStorageDirectory();
+        //File storageDir = new File(storageDirP,"wangyf");
+
+        if (!storageDir.exists()) {
+            storageDir.mkdirs();
+            Log.i(getClass().getSimpleName(), "外部存储不存在！");
+        } else {
+            Log.i(getClass().getSimpleName(), "外部存储存在！");
+
+        }
         //File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
 
@@ -138,9 +161,18 @@ public class CameraActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             if (takeFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "vcoolwind.com.compositivesample.fileprovider",
-                        takeFile);
+                Uri photoURI = null;
+                if (Build.VERSION.SDK_INT >= 24) {
+                    //API 24后不再支持file://访问，要用FileProvider替换。
+                    photoURI = FileProvider.getUriForFile(
+                            this,
+                            "vcoolwind.com.compositivesample.fileprovider",
+                            takeFile);
+                } else {
+                    // API 24前继续，貌似用FileProvider会有问题。
+                    photoURI = Uri.fromFile(takeFile);
+                }
+
                 takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE_SAVE);
             }
@@ -156,32 +188,31 @@ public class CameraActivity extends AppCompatActivity {
         this.sendBroadcast(mediaScanIntent);
     }
 
-    // Storage Permissions
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
 
-    /**
-     * Checks if the app has permission to write to device storage
-     * <p>
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity
-     */
-    public static void verifyStoragePermissions(Activity activity) {
-        // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    private void setPic() {
+        //缩放图片
 
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
+        // Get the dimensions of the View
+        int targetW = imageView_camera.getWidth();
+        int targetH = imageView_camera.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentTmpPicFile, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW / targetW, photoH / targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentTmpPicFile, bmOptions);
+        imageView_camera.setImageBitmap(bitmap);
     }
 
 }

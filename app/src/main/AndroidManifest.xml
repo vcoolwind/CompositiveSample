@@ -3,11 +3,8 @@
     package="vcoolwind.com.compositivesample">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:name=".App"
@@ -19,11 +16,11 @@
         <activity
             android:name=".ui.FirstRecycleViewActivity"
             android:parentActivityName=".ui.NavigateActivity" />
-
         <activity android:name=".ui.SecondRecycleViewActivity" />
         <activity android:name=".ui.ThirdRecycleViewActivity" />
         <activity android:name=".ui.CameraActivity" />
-
+        <activity android:name=".ui.PictureBrowserActivity" />
+        <activity android:name=".ui.SinglePicActivity"/>
         <activity android:name=".ui.NavigateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,9 +36,10 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".ui.SinglePicActivity"></activity>
     </application>
 
 </manifest>

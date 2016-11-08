@@ -47,5 +47,14 @@ public class NavigateActivity extends AppCompatActivity {
             }
         });
 
+        Button button_pic_browser = (Button)findViewById(R.id.button_pic_browser);
+        button_pic_browser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),PictureBrowserActivity.class));
+            }
+        });
+
+
     }
 }
