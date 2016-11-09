@@ -55,4 +55,14 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button_camera"
         android:text="浏览图片" />
+
+    <Button
+        android:id="@+id/button_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button_pic_browser"
+        android:layout_marginTop="13dp"
+        android:text="AsyncTask例子" />
 </RelativeLayout>

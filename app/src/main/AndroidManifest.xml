@@ -20,7 +20,7 @@
         <activity android:name=".ui.ThirdRecycleViewActivity" />
         <activity android:name=".ui.CameraActivity" />
         <activity android:name=".ui.PictureBrowserActivity" />
-        <activity android:name=".ui.SinglePicActivity"/>
+        <activity android:name=".ui.SinglePicActivity" />
         <activity android:name=".ui.NavigateActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ui.SinglePicActivity"></activity>
+        <activity android:name=".ui.AsyncTaskSampleActivity"></activity>
     </application>
 
 </manifest>

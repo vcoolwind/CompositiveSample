@@ -23,7 +23,7 @@ public class PictureBrowserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_picture_browser);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_picture_browser);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.addItemDecoration(new GridDividerItemDecoration(this));
         PictureBrowserAdapter adapter = new PictureBrowserAdapter(this);
         WindowManager wm = (WindowManager) this
@@ -31,8 +31,8 @@ public class PictureBrowserActivity extends AppCompatActivity {
         int displayWidth = wm.getDefaultDisplay().getWidth();
         int displayHeight = wm.getDefaultDisplay().getHeight();
 
-        int width = displayWidth /2;
-        int height = displayHeight/2;
+        int width = displayWidth /3;
+        int height = displayHeight/6;
 
 
         adapter.setWidth(width);
