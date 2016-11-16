@@ -3,8 +3,11 @@ package vcoolwind.com.compositivesample.util;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import java.io.File;
+
+import dalvik.annotation.TestTargetClass;
 
 /**
  * Created by BlackStone on 2016/11/8.
@@ -43,6 +46,12 @@ public class PicUtil {
         return inSampleSize;
     }
 
+    public static Bitmap decodeSampledBitmapFromFile(File imgFile,
+                                                     int reqWidth, int reqHeight) {
+        Log.i(PicUtil.class.getSimpleName(),"imgFile:"+imgFile);
+        return decodeSampledBitmapFromFile(imgFile.getAbsolutePath(), reqWidth, reqHeight);
+
+    }
 
     public static Bitmap decodeSampledBitmapFromFile(String filePath,
                                                      int reqWidth, int reqHeight) {

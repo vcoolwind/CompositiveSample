@@ -39,7 +39,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ui.AsyncTaskSampleActivity"></activity>
+        <activity android:name=".ui.AsyncTaskSampleActivity" />
+        <activity android:name=".ui.GridImageActivity" />
+        <activity android:name=".ui.GridSampleActivity"></activity>
     </application>
 
 </manifest>

@@ -1,13 +1,12 @@
 package vcoolwind.com.compositivesample.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import vcoolwind.com.compositivesample.R;
-import vcoolwind.com.compositivesample.ui.task.AsyncTaskSample;
 
 public class NavigateActivity extends AppCompatActivity {
 
@@ -61,6 +60,22 @@ public class NavigateActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), AsyncTaskSampleActivity.class));
+            }
+        });
+
+        Button button_grid_img = (Button) findViewById(R.id.button_grid_img);
+        button_grid_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), GridImageActivity.class));
+            }
+        });
+
+        Button button_grid_sample = (Button) findViewById(R.id.button_grid_sample);
+        button_grid_sample.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), GridSampleActivity.class));
             }
         });
 
