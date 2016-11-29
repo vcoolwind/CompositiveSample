@@ -21,7 +21,9 @@
         <activity android:name=".ui.CameraActivity" />
         <activity android:name=".ui.PictureBrowserActivity" />
         <activity android:name=".ui.SinglePicActivity" />
-        <activity android:name=".ui.NavigateActivity">
+        <activity
+            android:name=".ui.NavigateActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,7 +43,10 @@
 
         <activity android:name=".ui.AsyncTaskSampleActivity" />
         <activity android:name=".ui.GridImageActivity" />
-        <activity android:name=".ui.GridSampleActivity"></activity>
+        <activity android:name=".ui.GridSampleActivity" />
+        <activity android:name=".ui.LoadingViewPagerActivity" />
+        <activity android:name=".ui.TextInputLayoutActivity" />
+        <activity android:name=".ui.DialogToastSnackbarActivity" android:theme="@style/Theme.AppCompat.Light"></activity>
     </application>
 
 </manifest>

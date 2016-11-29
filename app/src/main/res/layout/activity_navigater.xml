@@ -85,4 +85,24 @@
         android:layout_below="@+id/button_grid_img"
         android:layout_marginTop="17dp"
         android:text="Grid简单例子" />
+
+    <Button
+        android:text="TextInputLayout应用"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_grid_sample"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/button_text_input_layout" />
+
+    <Button
+        android:text="Button_dialog_toast_snackbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/button_text_input_layout"
+        android:layout_toEndOf="@+id/button_text_input_layout"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:id="@+id/button_dialog_toast_snackbar" />
 </RelativeLayout>

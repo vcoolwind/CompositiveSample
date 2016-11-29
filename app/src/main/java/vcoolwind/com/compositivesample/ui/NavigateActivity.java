@@ -79,6 +79,22 @@ public class NavigateActivity extends AppCompatActivity {
             }
         });
 
+        Button button_text_input_layout = (Button) findViewById(R.id.button_text_input_layout);
+        button_text_input_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), TextInputLayoutActivity.class));
+            }
+        });
+
+
+        Button button_dialog_toast_snackbar = (Button)findViewById(R.id.button_dialog_toast_snackbar);
+        button_dialog_toast_snackbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), DialogToastSnackbarActivity.class));
+            }
+        });
 
     }
 }
